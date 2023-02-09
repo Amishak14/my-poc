@@ -81,17 +81,17 @@ pipeline {
         }
       }
       
-      stage("deploy the application") {
-        steps {
-            script {
-                openshift.withCluster() {
-                    openshift.withProject("$PROJECT_NAME") {
-                        echo "Using project: ${openshift.project()}"
-                         sh 'sh -x $WORKSPACE/backend-deployment.sh'
-                    }
-                 }
-            }
-        } 
-    }  
+//       stage("deploy the application") {
+//         steps {
+//             script {
+//                 openshift.withCluster() {
+//                     openshift.withProject("$PROJECT_NAME") {
+//                         echo "Using project: ${openshift.project()}"
+//                          sh 'sh -x $WORKSPACE/backend-deployment.sh'
+//                     }
+//                  }
+//             }
+//         } 
+//     }  
    }   
 }   
