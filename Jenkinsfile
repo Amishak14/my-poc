@@ -17,6 +17,7 @@ pipeline {
     agent any
   environment {
     COMMIT_ID = sh (script: 'git rev-parse HEAD', returnStdout: true).trim().substring(0,3)
+  }
     stages {
 //         stage("Checkout") {
 //             steps {
