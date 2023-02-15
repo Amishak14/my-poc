@@ -45,7 +45,7 @@ pipeline {
             toImagePath: "amisha-jenkins",
             toImageName    : "expense-tracker-backend",
            // toImageTag     : "${env.BUILD_NUMBER}"
-             toImageTag  : "$env.COMMIT_ID"
+             toImageTag  : "$COMMIT_ID"
 
     ])
        }
@@ -73,7 +73,7 @@ pipeline {
             toImagePath: "amisha-jenkins",
             toImageName    : "expense-tracker-frontend",
            // toImageTag     : "${env.BUILD_NUMBER}"
-            toImageTag  : "$env.COMMIT_ID"
+            toImageTag  : "$COMMIT_ID"
       
 
     ])
@@ -83,7 +83,7 @@ pipeline {
       stage("Trigger Deployment Update Pipeline"){
         steps{
          // build job:'tag-pipeline' , parameters: [string(name: 'DOCKERTAG',value: env.BUILD_NUMBER)]
-           build job:'tag-pipeline' , parameters: [string(name: 'COMMIT_ID',value: env.COMMIT_ID)]
+           build job:'tag-pipeline' , parameters: [string(name: 'COMMIT_ID',value: env.BUILD_NUMBER)]
         }
       }
       
