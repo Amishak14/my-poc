@@ -15,6 +15,8 @@ retriever: modernSCM(
 
 pipeline {
     agent any
+  environment {
+    COMMIT_ID = sh (script: 'git rev-parse HEAD', returnStdout: true).trim().substring(0,3)
     stages {
 //         stage("Checkout") {
 //             steps {
@@ -42,7 +44,8 @@ pipeline {
             sourceImageTag : "latest",
             toImagePath: "amisha-jenkins",
             toImageName    : "expense-tracker-backend",
-            toImageTag     : "${env.BUILD_NUMBER}"
+           // toImageTag     : "${env.BUILD_NUMBER}"
+             toImageTag  : "$env.COMMIT_ID"
 
     ])
        }
@@ -69,7 +72,9 @@ pipeline {
             sourceImageTag : "latest",
             toImagePath: "amisha-jenkins",
             toImageName    : "expense-tracker-frontend",
-            toImageTag     : "${env.BUILD_NUMBER}"
+           // toImageTag     : "${env.BUILD_NUMBER}"
+            toImageTag  : "$env.COMMIT_ID"
+      
 
     ])
        }
@@ -77,7 +82,8 @@ pipeline {
       
       stage("Trigger Deployment Update Pipeline"){
         steps{
-          build job:'tag-pipeline' , parameters: [string(name: 'DOCKERTAG',value: env.BUILD_NUMBER)]
+         // build job:'tag-pipeline' , parameters: [string(name: 'DOCKERTAG',value: env.BUILD_NUMBER)]
+           build job:'tag-pipeline' , parameters: [string(name: 'COMMIT_ID',value: env.COMMIT_ID)]
         }
       }
       
